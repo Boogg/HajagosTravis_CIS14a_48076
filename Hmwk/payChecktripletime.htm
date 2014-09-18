@@ -1,0 +1,40 @@
+<script type="text/javascript">
+ /*
+ 	Travis Hajagos
+	Sept 8th, 2014
+	Purpose: Investigate the branching constructs
+*/
+	
+</script>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Paycheck</title>
+</head>
+
+<body>
+<script type="text/javascript">
+	//declare and initialize variables
+	var hours=parseInt(Math.random()*20+30); //Hours worked in (hrs)
+	var payRate=10; //($'s/hr)
+	var dbt=20; //Hour at which doubletime starts
+	var trpltime=40; //hours at which triple time starts
+	var payChk; //Declaration of pay check in dollars
+	//Output the inputs
+	document.write("<h1>Hours worked = "+hours+"(hrs)</h1>");
+	document.write("<h1>Pay Rate = $"+payRate+"</h1>");
+	//Determine out paycheck
+	payChk=(hours<=dbt)?hours*payRate:
+	payChk=(hours>dbt&&hours<trpltime)?hours*payRate+(hours-dbt)*payRate:
+	 hours*payRate+(hours-dbt)*payRate+(hours-trpltime)*payRate;
+	
+	//fix output to 2 digits
+	payChk=payChk.toFixed(2);
+	//Output our Paycheck
+	document.write("<h1>Our Pay Check = $"+payChk+"</h1>")
+</script>
+</body>
+</html>
