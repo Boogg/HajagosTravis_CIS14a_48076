@@ -1,0 +1,73 @@
+<script type="text/javascript">
+ /*
+ 	Travis Hajagos
+	Sept 28th, 2014
+	Purpose: Paycheck Table
+*/
+	
+</script>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Paycheck</title>
+</head>
+
+<body>
+<h1>Pay Check Table</h1>
+<table width="400" border="1">
+	<tr>
+		<th>Hours</th>
+		<th>Gross Pay</th>
+		<th>Pay Rate</th>
+		<th>Taxes</th>
+		<th>Net Pay</th>
+	</tr>
+<script type="text/javascript">
+	//declare and initialize variables
+	var hours=""; //parseInt(Math.random()*20+30); //Hours worked in (hrs)
+	var payRate=10; //($'s/hr)
+	var payrate=""; //payrate output
+	var dbt=20; //Hour at which doubletime starts
+	var trpltime=40; //hours at which triple time starts
+	var payChk; //Declaration of gross pay check in dollars
+	var tax; //Taxes on gross pay
+	var netPay=""; //net pay after taxes
+	//Output the inputs
+	for(hours=0;hours<=72;hours++){
+		document.write("<tr>");
+		document.write("<td>"+hours+"</td>");
+	
+		//Determine and output our paycheck
+		payChk=(hours<=dbt)?hours*payRate:
+		payChk=(hours>dbt&&hours<trpltime)?hours*payRate+(hours-dbt)*payRate:
+			hours*payRate+(hours-dbt)*payRate+(hours-trpltime)*payRate;
+		//fix output to 2 digits
+		payChk=payChk.toFixed(2);
+		document.write("<td>$"+payChk+"</td>")
+		//output our payrate
+		if(hours<20){
+			payrate=10;
+		}else if(hours<40){
+			payrate=20;
+		}else{
+			payrate=30;
+		};
+		document.write("<td>$"+payrate+"/hour</td>");
+		
+		//calculate and output the tax @ 10%
+		tax= payChk/10;
+		document.write("<td>$"+tax.toFixed(2)+"</td>");
+		//calculate and output net pay
+		 netPay= payChk-tax;
+		 document.write("<td>$"+netPay.toFixed(2)+"</td>");
+		 
+		//end table row
+		document.write("</tr>");
+	
+	}
+</script>
+</body>
+</html>
