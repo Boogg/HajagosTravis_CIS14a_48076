@@ -1,0 +1,84 @@
+<script type="text/javascript">
+ /*
+ 	Travis Hajagos
+	Sept 28th, 2014
+	Purpose: Paycheck Table
+*/
+	
+</script>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Paycheck</title>
+</head>
+
+<body>
+<script type="text/javascript">
+	//declare and initialize variables
+	var hours=""; 
+	var payRate=10; //($'s/hr)
+	var dbt=20; //Hour at which doubletime starts
+	var trpltime=40; //hours at which triple time starts
+	var col=" "; //colum number
+	//declare the arrays
+	
+	var payTable=[];
+	
+
+		for(col=1;col<=5;col++){
+		payTable[col]=[];
+	}
+	//set the arrays
+	for(hours=0;hours<=72;hours++){
+		payTable[1][hours]=hours;
+		//Determine and output our paycheck
+		payTable[2][hours]=(hours<=dbt)?hours*payRate:
+		payTable[2][hours]=(hours>dbt&&hours<trpltime)?hours*payRate+(hours-dbt)*payRate:
+			hours*payRate+(hours-dbt)*payRate+(hours-trpltime)*payRate;
+			
+		//fix output to 2 digits
+		payTable[2][hours]= payTable[2][hours].toFixed(2);
+		
+		//our payrate
+		if(hours<20){
+			payTable[3][hours]=10;
+		}else if(hours<40){
+			payTable[3][hours]=20;
+		}else{
+			payTable[3][hours]=30;
+		};
+		
+		//calculate the tax @ 10%
+		payTable[4][hours]= payTable[2][hours]/10;
+		payTable[4][hours]=payTable[4][hours].toFixed(2);
+		
+		//calculate net pay
+		 payTable[5][hours]= payTable[2][hours] - payTable[4][hours];
+		 payTable[5][hours]=payTable[3][hours].toFixed(2);
+	};
+</script>
+	<h1>Pay Check Table</h1>
+	<table width="400" border="1">
+	<tr>
+		<th>Hours</th>
+		<th>Gross Pay</th>
+		<th>Pay Rate</th>
+		<th>Taxes</th>
+		<th>Net Pay</th>
+	</tr>
+	
+<script type="text/javascript">
+	for(hours=0;hours<=72;hours++){
+		document.write("<tr>");
+		for(col=1;col<=5;col++){
+			document.write("<td>"+payTable[col][hours]+"</td>");
+		}
+		document.write("</tr>");
+		
+	};
+</script>
+</body>
+</html>
