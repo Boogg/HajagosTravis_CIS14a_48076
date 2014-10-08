@@ -1,0 +1,120 @@
+<script type="text/javascript">
+ /*
+ 	Travis Hajagos
+	Sept 28th, 2014
+	Purpose: Paycheck Table
+*/
+	
+</script>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Paycheck</title>
+<script type="text/javascript" src="getForm.js"></script>
+</head>
+
+<body>
+<h1> Pay Check Table</h1>
+<script type="text/javascript">
+	//declare and initialize variables
+	var url=document.location.href; //get function variables
+	var i=0;
+	var data=[];
+	
+	$_GET=getForm(url);
+	
+		for(property in $_GET){
+			data[i]= $_GET[property];
+			i++;
+		};
+	
+	var hoursWorked= data[0]; 
+	var payRate= data[3]; //($'s/hr)
+	var dbt= data[1]; //Hour at which doubletime starts
+	var trpltime= data[2]; //hours at which triple time starts
+	var tax= data[4]; //tax in %
+	var col=" "; //colum number
+	
+	//display the variables
+	document.write("<p>")
+	document.write("Hours Worked = "+hoursWorked+" hours<br />")
+	document.write("Double time starts at = "+dbt+" hours<br />")
+	document.write("Triple time starts at = "+trpltime+" hours<br />")
+	document.write("Pay Rate = "+payRate+" $'s/hour<br />")
+	document.write("Tax rate = "+tax+"%<br />")
+	document.write("</p>")
+	//declare the arrays
+	
+	var payTable=[];
+	
+
+		for(col=1;col<=5;col++){
+		payTable[col]=[];
+	}
+	//set the arrays
+	for(var hours=0;hours<= hoursWorked; hours++){
+		payTable[1][hours]=hours;
+		//Determine and output our paycheck
+		payTable[2][hours]=(hours<=dbt)?hours*payRate:
+		payTable[2][hours]=(hours>dbt&&hours<trpltime)?hours*payRate+(hours-dbt)*payRate:
+			hours*payRate+(hours-dbt)*payRate+(hours-trpltime)*payRate;
+			
+		//fix output to 2 digits
+		payTable[2][hours]= payTable[2][hours].toFixed(2);
+		
+		//our payrate
+		if(hours< dbt){
+			payTable[3][hours]= payRate;
+		}else if(hours< trpltime){
+			payTable[3][hours]= (payRate*2);
+		}else{
+			payTable[3][hours]= (payRate*3);
+		};
+		
+		//calculate the tax @ 10%
+		payTable[4][hours]= (payTable[2][hours])*(tax/100);
+		payTable[4][hours]=payTable[4][hours].toFixed(2);
+		
+		//calculate net pay
+		 payTable[5][hours]= payTable[2][hours] - payTable[4][hours];
+		 payTable[5][hours]=payTable[5][hours].toFixed(2);
+	};
+</script>
+	<!-- create the table and label the columns
+	!-->
+	<table width="400" border="0">
+	<tr style="text-align:right">
+		<th>Hours</th>
+		<th>Gross Pay</th>
+		<th>Pay Rate</th>
+		<th>Taxes</th>
+		<th>Net Pay</th>
+	</tr>
+	
+<script type="text/javascript">
+	for(hours=0;hours<= hoursWorked;hours++){
+		document.write("<tr style='text-align:right'>");
+		for(col=1;col<=5;col++){
+			if(col==2){
+			document.write("<td>$"+payTable[col][hours]+"</td>");
+			}else {if(col==3){
+			document.write("<td>$"+payTable[col][hours]+"/hr</td>");
+			}else{if(col>3){
+			document.write("<td>$"+payTable[col][hours]+"</td>");
+			}else{
+			document.write("<td>"+payTable[col][hours]+"</td>");
+			}}}
+			
+			
+			
+			
+		}
+		document.write("</tr>");
+		
+	};
+</script>
+</body>
+</html>
