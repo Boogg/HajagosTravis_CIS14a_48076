@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Milk Run</title>  
+
+<!-- Add in style sheets -->
+<link rel="stylesheet" type="text/css" href="start_screen_stylesheet.css">
+<link rel="stylesheet" type="text/css" href="log_in_stylesheet.css">
+
+<!-- Add in scripts -->
+<script  src="Startscreen.js"></script>
+
+</head>
+<body>
+
+<!-- Game screen divider -->
+<div id="mainCanvas" style="z-index:0; position: relative; display:none" >
+<canvas id="layer1" class="myCanvas" style="z-index:1; position: absolute; left: 0; top: 0;" ></canvas>
+<canvas id="layer2" class="myCanvas" style="z-index:2; position: absolute; left: 0; top: 0;" ></canvas>
+<canvas id="layer3" class="myCanvas" style="z-index:4; position: absolute; left: 0; top: 0;" ></canvas>
+<canvas id="layer4" class="myCanvas" style="z-index:4; position: absolute; left: 0; top: 0;" ></canvas>
+<canvas id="layer5" class="myCanvas" style="z-index:5; position: absolute; left: 0; top: 0;" ></canvas>
+<canvas id="layer6" class="myCanvas" style="z-index:6; position: absolute; left: 0; top: 0;" ></canvas>
+<canvas id="layerCharacter" class="myCanvas" style="z-index:99; position: absolute; left: 0; top: 0;" ></canvas>
+<canvas id="layerScore" class="myCanvas" style="z-index:100; position: absolute; left: 0; top: 0;" ></canvas>
+ <script id="mainGame"></script>
+</div>
+
+<!-- Start screen divider -->
+<div id="start_screen" style="z-index:200;">
+<h1 id="title">Milk Run!</h1>
+<button id="start_button" onclick="startGame();">Play</button><br />
+<button id="log_in_button" onclick="In('log_in');">Log In</button><br />
+<button id="log_out_button" style="display:none">Log Out</button>
+<button id="options_button" onclick="In('options_screen');">Options</button>
+</div>
+
+<!-- Log in screen divider -->
+<div id="log_in" style="display:none">
+<h1>Log In Screen</h1>
+<button id="1back" onclick="Back('log_in');" >Back to Title Screen</button>
+</div>
+
+<!-- Options screen divider -->
+<div id="options_screen" style="display:none">
+<h1>Options Screen</h1>
+<button id="2back" onclick="Back('options_screen');">Back to Title Screen</button>
+</div>
+
+</body>
+</html>
